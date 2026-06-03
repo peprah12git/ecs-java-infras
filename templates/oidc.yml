@@ -90,28 +90,28 @@ Resources:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
               StringLike:
-                token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}/ecs-java-infra:*"
-    Policies:
-      - PolicyName: S3TemplatesSyncPolicy
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-            - Effect: Allow
-              Action:
-                - s3:PutObject
-                - s3:GetObject
-                - s3:DeleteObject
-                - s3:ListBucket
-              Resource:
-                - arn:aws:s3:::ecs-java-web-app-cfn-templates
-                - arn:aws:s3:::ecs-java-web-app-cfn-templates/*
-    Tags:
-      - Key: Project
-        Value: ecs-java-web-app
-      - Key: Environment
-        Value: production
-      - Key: ManagedBy
-        Value: CloudFormation
+                token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}/ecs-java-infras:*"
+      Policies:
+        - PolicyName: S3TemplatesSyncPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:DeleteObject
+                  - s3:ListBucket
+                Resource:
+                  - arn:aws:s3:::ecs-java-web-app-cfn-templates
+                  - arn:aws:s3:::ecs-java-web-app-cfn-templates/*
+      Tags:
+        - Key: Project
+          Value: ecs-java-web-app
+        - Key: Environment
+          Value: production
+        - Key: ManagedBy
+          Value: CloudFormation
 
 
 Outputs:
