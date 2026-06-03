@@ -74,23 +74,23 @@ Resources:
         - Key: ManagedBy
           Value: CloudFormation
 
-GitHubActionsInfraRole:
-  Type: AWS::IAM::Role
-  Properties:
-    RoleName: GitHubActionsInfraRole
-    Description: Role assumed by GitHub Actions in infra repo to sync templates to S3
-    AssumeRolePolicyDocument:
-      Version: '2012-10-17'
-      Statement:
-        - Effect: Allow
-          Principal:
-            Federated: !Ref GitHubOIDCProvider
-          Action: sts:AssumeRoleWithWebIdentity
-          Condition:
-            StringEquals:
-              token.actions.githubusercontent.com:aud: sts.amazonaws.com
-            StringLike:
-              token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}/ecs-java-infra:*"
+  GitHubActionsInfraRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: GitHubActionsInfraRole
+      Description: Role assumed by GitHub Actions in infra repo to sync templates to S3
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref GitHubOIDCProvider
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+              StringLike:
+                token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}/ecs-java-infra:*"
     Policies:
       - PolicyName: S3TemplatesSyncPolicy
         PolicyDocument:
