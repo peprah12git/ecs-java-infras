@@ -1,9 +1,3 @@
 template-file-path: root-stack.yml
-parameters:
-  GitHubOrg: peprah12git
-  GitHubRepo: ecs-java-web-app
-tags:
-  - key: Project
-    value: ecs-java-web-app
-  - key: ManagedBy
-    value: CloudFormation
+parameters: {}
+tags: {}
