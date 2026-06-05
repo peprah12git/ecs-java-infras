@@ -8,7 +8,7 @@ Resources:
       RepositoryName: ecs-java-web-app
       ImageScanningConfiguration:
         ScanOnPush: true
-      ImageTagMutability: IMMUTABLE
+      ImageTagMutability: MUTABLE
       EncryptionConfiguration:
         EncryptionType: AES256
       LifecyclePolicy:
