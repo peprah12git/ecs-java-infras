@@ -15,6 +15,7 @@ Parameters:
 Resources:
   GitHubOIDCProvider:
     Type: AWS::IAM::OIDCProvider
+    DeletionPolicy: Retain
     Properties:
       Url: https://token.actions.githubusercontent.com
       ClientIdList:
@@ -29,6 +30,7 @@ Resources:
 
   GitHubActionsRole:
     Type: AWS::IAM::Role
+    DeletionPolicy: Retain
     Properties:
       RoleName: GitHubActionsECRRole
       Description: Role assumed by GitHub Actions to push images to ECR
@@ -44,7 +46,6 @@ Resources:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
               StringLike:
                 token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}/${GitHubRepo}:*"
-
       Policies:
         - PolicyName: ECRPushPolicy
           PolicyDocument:
@@ -76,6 +77,7 @@ Resources:
 
   GitHubActionsInfraRole:
     Type: AWS::IAM::Role
+    DeletionPolicy: Retain
     Properties:
       RoleName: GitHubActionsInfraRole
       Description: Role assumed by GitHub Actions in infra repo to sync templates to S3
@@ -112,7 +114,6 @@ Resources:
           Value: production
         - Key: ManagedBy
           Value: CloudFormation
-
 
 Outputs:
   GitHubActionsRoleArn:
