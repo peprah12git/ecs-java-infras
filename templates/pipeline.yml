@@ -178,6 +178,10 @@ Resources:
                   - ecr:DescribeImages
                   - ecr:GetAuthorizationToken
                 Resource: "*"
+              - Effect: Allow
+                Action:
+                  - codestar-connections:UseConnection
+                Resource: "arn:aws:codeconnections:eu-central-1:904233109505:connection/52c7aed9-4047-4ecd-8dcd-3c774e7df860"
       Tags:
         - Key: Project
           Value: ecs-java-web-app
@@ -206,6 +210,20 @@ Resources:
                 RepositoryName: !Ref ECRRepositoryName
                 ImageTag: latest
               OutputArtifacts:
+                - Name: ECRArtifact
+              RunOrder: 1
+
+            - Name: GitHubSource
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Provider: CodeStarSourceConnection
+                Version: '1'
+              Configuration:
+                ConnectionArn: "arn:aws:codeconnections:eu-central-1:904233109505:connection/52c7aed9-4047-4ecd-8dcd-3c774e7df860"
+                FullRepositoryId: peprah12git/ecs-java-web-app
+                BranchName: main
+              OutputArtifacts:
                 - Name: SourceArtifact
               RunOrder: 1
 
@@ -224,16 +242,12 @@ Resources:
                 AppSpecTemplateArtifact: SourceArtifact
                 TaskDefinitionTemplatePath: taskdef.json
                 AppSpecTemplatePath: appspec.yml
-                Image1ArtifactName: SourceArtifact
+                Image1ArtifactName: ECRArtifact
                 Image1ContainerName: IMAGE1_NAME
               InputArtifacts:
                 - Name: SourceArtifact
+                - Name: ECRArtifact
               RunOrder: 1
-      Tags:
-        - Key: Project
-          Value: ecs-java-web-app
-        - Key: ManagedBy
-          Value: CloudFormation
 
   # ─── EventBridge IAM Role ──────────────────────────────────────
   EventBridgeRole:
