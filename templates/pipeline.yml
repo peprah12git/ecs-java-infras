@@ -34,6 +34,7 @@ Resources:
   # ─── S3 Artifact Bucket ────────────────────────────────────────
   ArtifactBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
     Properties:
       BucketName: !Sub ecs-java-web-app-artifacts-${AWS::AccountId}
       VersioningConfiguration:
@@ -117,8 +118,8 @@ Resources:
               ListenerArns:
                 - !Ref TestListenerArn
             TargetGroups:
-              - Name: !Select [5, !Split [":", !Ref BlueTargetGroupArn]]
-              - Name: !Select [5, !Split [":", !Ref GreenTargetGroupArn]]
+              - Name: !Select [1, !Split ["/", !Select [5, !Split [":", !Ref BlueTargetGroupArn]]]]
+              - Name: !Select [1, !Split ["/", !Select [5, !Split [":", !Ref GreenTargetGroupArn]]]]
       Tags:
         - Key: Project
           Value: ecs-java-web-app
