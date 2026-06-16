@@ -137,6 +137,7 @@ Resources:
         - Key: ManagedBy
           Value: CloudFormation
 
+#sends all public outbound traffic to the ing
   PublicRoute:
     Type: AWS::EC2::Route
     DependsOn: InternetGatewayAttachment
