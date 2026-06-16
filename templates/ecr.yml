@@ -4,7 +4,6 @@ Description: ECR Repository for ECS Java Web App
 Resources:
   ECRRepository:
     Type: AWS::ECR::Repository
-    DeletionPolicy: Retain
     Properties:
       RepositoryName: ecs-java-web-app
       ImageScanningConfiguration:
