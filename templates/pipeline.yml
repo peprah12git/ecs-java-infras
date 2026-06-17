@@ -34,7 +34,6 @@ Resources:
   # ─── S3 Artifact Bucket ────────────────────────────────────────
   ArtifactBucket:
     Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
     Properties:
       BucketName: !Sub ecs-java-web-app-artifacts-${AWS::AccountId}
       VersioningConfiguration:
