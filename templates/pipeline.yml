@@ -178,10 +178,6 @@ Resources:
                   - ecr:DescribeImages
                   - ecr:GetAuthorizationToken
                 Resource: "*"
-              - Effect: Allow
-                Action:
-                  - codestar-connections:UseConnection
-                Resource: "arn:aws:codeconnections:eu-central-1:904233109505:connection/52c7aed9-4047-4ecd-8dcd-3c774e7df860"
       Tags:
         - Key: Project
           Value: ecs-java-web-app
@@ -213,16 +209,16 @@ Resources:
                 - Name: ECRArtifact
               RunOrder: 1
 
-            - Name: GitHubSource
+            - Name: S3Source
               ActionTypeId:
                 Category: Source
                 Owner: AWS
-                Provider: CodeStarSourceConnection
+                Provider: S3
                 Version: '1'
               Configuration:
-                ConnectionArn: "arn:aws:codeconnections:eu-central-1:904233109505:connection/52c7aed9-4047-4ecd-8dcd-3c774e7df860"
-                FullRepositoryId: peprah12git/ecs-java-web-app
-                BranchName: main
+                S3Bucket: !Ref ArtifactBucket
+                S3ObjectKey: templates/source.zip
+                PollForSourceChanges: false
               OutputArtifacts:
                 - Name: SourceArtifact
               RunOrder: 1

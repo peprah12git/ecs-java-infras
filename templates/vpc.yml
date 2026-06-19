@@ -143,13 +143,6 @@ Resources:
         - Key: ManagedBy
           Value: CloudFormation
 
-#  PrivateRoute:
-#    Type: AWS::EC2::Route
-#    Properties:
-#      RouteTableId: !Ref PrivateRouteTable
-#      DestinationCidrBlock: 0.0.0.0/0
-
-
   PrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
