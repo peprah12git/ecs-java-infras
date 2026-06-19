@@ -51,6 +51,12 @@ Resources:
                   - ecr:CompleteLayerUpload
                   - ecr:PutImage
                 Resource: !Sub "arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/ecs-java-web-app"
+              - Sid: S3ArtifactUpload
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub "arn:aws:s3:::ecs-java-web-app-artifacts-${AWS::AccountId}/templates/*"
       Tags:
         - Key: Project
           Value: ecs-java-web-app
