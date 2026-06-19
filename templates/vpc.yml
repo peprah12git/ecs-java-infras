@@ -97,33 +97,6 @@ Resources:
         - Key: ManagedBy
           Value: CloudFormation
 
-  # ─── NAT Gateway ───────────────────────────────────────────────
-  NATGatewayEIP:
-    Type: AWS::EC2::EIP
-    DependsOn: InternetGatewayAttachment
-    Properties:
-      Domain: vpc
-      Tags:
-        - Key: Name
-          Value: ecs-java-web-app-nat-eip
-        - Key: Project
-          Value: ecs-java-web-app
-        - Key: ManagedBy
-          Value: CloudFormation
-
-  NATGateway:
-    Type: AWS::EC2::NatGateway
-    Properties:
-      AllocationId: !GetAtt NATGatewayEIP.AllocationId
-      SubnetId: !Ref PublicSubnet1
-      Tags:
-        - Key: Name
-          Value: ecs-java-web-app-nat-gateway
-        - Key: Project
-          Value: ecs-java-web-app
-        - Key: ManagedBy
-          Value: CloudFormation
-
   # ─── Route Tables ──────────────────────────────────────────────
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -175,7 +148,7 @@ Resources:
     Properties:
       RouteTableId: !Ref PrivateRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NATGateway
+
 
   PrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
