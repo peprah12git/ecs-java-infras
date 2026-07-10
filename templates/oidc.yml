@@ -94,8 +94,8 @@ Resources:
                   - s3:DeleteObject
                   - s3:ListBucket
                 Resource:
-                  - arn:aws:s3:::ecs-java-web-app-cfn-templates
-                  - arn:aws:s3:::ecs-java-web-app-cfn-templates/*
+                  - arn:aws:s3:::ecs-java-web-app-cfn-templates-825765391206
+                  - arn:aws:s3:::ecs-java-web-app-cfn-templates-825765391206/*
       Tags:
         - Key: Project
           Value: ecs-java-web-app
