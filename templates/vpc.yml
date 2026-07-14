@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: VPC, Subnets, IGW, NAT Gateway and Route Tables
+Description: VPC, Subnets, IGW and Route Tables
 
 Resources:
   # ─── VPC ───────────────────────────────────────────────────────
@@ -110,7 +110,7 @@ Resources:
         - Key: ManagedBy
           Value: CloudFormation
 
-#sends all public outbound traffic to the ing
+  #sends all public outbound traffic to the  IGW
   PublicRoute:
     Type: AWS::EC2::Route
     DependsOn: InternetGatewayAttachment

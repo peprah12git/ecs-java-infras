@@ -34,7 +34,6 @@ Resources:
       ClusterName: ecs-java-web-app-cluster
       CapacityProviders:
         - FARGATE
-        - FARGATE_SPOT
       DefaultCapacityProviderStrategy:
         - CapacityProvider: FARGATE
           Weight: 1
